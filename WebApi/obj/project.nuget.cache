@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yxpsBorxOkE10wWG9xmCDOLC5aYvoHV6WmRFZ5R2N+Pf1tDClnaim+hObXIlnVMOKxq3KLVEjHHfFqk8F2BK8Q==",
+  "dgSpecHash": "sJlzga9Dx35GRJsupMxvA7sqgMIfiIgOYnXcQF5Ax25GlI1T/hNzBCPmkJYQhoPcQcc2RVbe2AjcRFwsltIIAg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\tedha\\Desktop\\assignment\\Backend\\WebApi\\WebApi.csproj",
+  "projectFilePath": "C:\\Users\\tedha\\Desktop\\assignment\\ManeroBackend\\WebApi\\WebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\tedha\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.5\\microsoft.aspnetcore.openapi.7.0.5.nupkg.sha512",
     "C:\\Users\\tedha\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
