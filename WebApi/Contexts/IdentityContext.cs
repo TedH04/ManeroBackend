@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using WebApi.Models.Entities;
 
 namespace WebApi.Contexts
 {
@@ -9,5 +10,8 @@ namespace WebApi.Contexts
 		{
 
 		}
+
+		public DbSet<AddressEntity> Addresses { get; set; }
+		public DbSet<UserAddressEntity> UserAddresses { get; set; }
 	}
 }
