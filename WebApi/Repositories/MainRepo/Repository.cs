@@ -14,6 +14,5 @@ namespace WebApi.Repositories.MainRepo
 			_context = context;
 		}
 
-		public virtual async Task<TEntity>
 	}
 }
