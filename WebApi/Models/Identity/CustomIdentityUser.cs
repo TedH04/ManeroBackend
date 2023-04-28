@@ -16,11 +16,12 @@ namespace WebApi.Models.Identity
 		{
 			return new UserResponse
 			{
+				UserId = user.Id,
 				FirstName = user.FirstName,
 				LastName = user.LastName,
 				Email = user.Email!,
-				PhoneNumber = user.PhoneNumber,
-
+				PhoneNumber = user.PhoneNumber ??= null,
+				ProfileImage = user.ProfileImage ??= null
 			};
 		}
 	}
