@@ -5,11 +5,11 @@ using WebApi.Contexts;
 
 namespace WebApi.Repositories.MainRepo
 {
-	public abstract class Repository<TEntity, TContext>  where TEntity : class 
+	public abstract class Repository<TEntity, TContext>  where TEntity : class where TContext : DbContext
 	{
-		private readonly IdentityContext _context;
+		TContext _context;
 
-		protected Repository(IdentityContext context)
+		protected Repository(TContext context)
 		{
 			_context = context;
 		}
