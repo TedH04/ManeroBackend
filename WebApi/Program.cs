@@ -3,8 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using WebApi.Contexts;
+using WebApi.Helpers.Jwt;
 using WebApi.Models.Identity;
 using WebApi.Repositories;
+using WebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
@@ -19,6 +21,8 @@ builder.Services.AddDbContext<IdentityContext>(x => x.UseSqlServer(builder.Confi
 builder.Services.AddScoped<UserRepository>();
 
 // Services
+builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<JwtToken>();
 
 
 // Auth/Identity
