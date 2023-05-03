@@ -8,7 +8,7 @@ namespace WebApi.Helpers.Filters
 		public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
 		{
 			var config = context.HttpContext.RequestServices.GetService<IConfiguration>();
-			var apiKey = config!.GetValue<string>("ApiKey");
+			var apiKey = config!.GetValue<string>("ManeroApiKey");
 
 			if(!context.HttpContext.Request.Query.TryGetValue("key", out var key))
 			{

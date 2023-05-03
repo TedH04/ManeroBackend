@@ -25,7 +25,7 @@ namespace WebApi.Helpers.Jwt
 				Expires = expiresAt,
 				SigningCredentials = new SigningCredentials(
 					new SymmetricSecurityKey(
-						Encoding.UTF8.GetBytes(_configuration.GetSection("TokenValidation").GetValue<string>("TokenKey")!)),
+						Encoding.UTF8.GetBytes(_configuration.GetSection("TokenValidation").GetValue<string>("SecretKey")!)),
 					SecurityAlgorithms.HmacSha512Signature
 				)
 			};
