@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using WebApi.Models.Dtos;
 using WebApi.Models.Identity;
+using WebApi.Repositories;
 
 namespace WebApi.Services
 {
@@ -15,13 +16,13 @@ namespace WebApi.Services
 
         public async Task<bool> SignUpAsync(SignUpRequest request)
         {
-            CustomIdentityUser user = request;
+            CustomIdentityUser identityUser = request;
 
-            var createResult = await _userRepo.SignUpAsync(user, request.Password);
+            var createResult = await _userRepo.SignUpAsync(identityUser, request.Password);
 
             if (createResult.Succeeded)
             {
-                var signInResult = await _userRepo.SignInAsync(user.Email, request.Password, false, false);
+                var signInResult = await _userRepo.SignInAsync(identityUser.Email!, request.Password, false, false);
 
                 if (signInResult.Succeeded)
                 {
@@ -38,13 +39,21 @@ namespace WebApi.Services
 
             if (identityUser != null)
             {
-                var signInResult = await _userRepo.SignInAsync(request.Email, request.Password, false, false);
+                var signInResult = await _userRepo.SignInAsync(identityUser.Email!, request.Password, false, false);
 
                 if (signInResult.Succeeded)
                 {
-                    var claimsIdentity = new ClaimsIdentity
+                    var claimsIdentity = new ClaimsIdentity(new Claim[]
+                    {
+                        new Claim("id", identityUser.Id.ToString()),
+                        new Claim(ClaimTypes.Name, identityUser.Email!)
+                    });
+
+
                 }
             }
+
+            return string.Empty;
         }
     }
 }
