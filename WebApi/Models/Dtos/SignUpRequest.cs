@@ -18,6 +18,7 @@ namespace WebApi.Models.Dtos
                 FirstName = request.FirstName,
                 LastName = request.LastName,
                 Email = request.Email,
+                UserName = request.Email
             };
         }
 
