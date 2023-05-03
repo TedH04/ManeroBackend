@@ -15,7 +15,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Azure keyvault
-builder.Configuration.AddAzureKeyVault(new Uri($"{builder.Configuration["KeyVault"]}"), new DefaultAzureCredential());
+//builder.Configuration.AddAzureKeyVault(new Uri($"{builder.Configuration["KeyVault"]}"), new DefaultAzureCredential());
 
 // Contexts
 builder.Services.AddDbContext<IdentityContext>(x => x.UseSqlServer(builder.Configuration["ManeroG4Sql"]));
