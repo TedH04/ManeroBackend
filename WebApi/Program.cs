@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using WebApi.Contexts;
 using WebApi.Models.Identity;
+using WebApi.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
@@ -12,7 +13,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<IdentityContext>(x => x.UseSqlServer(builder.Configuration["ManeroG4Sql"]));
 
 // Repositories
-
+builder.Services.AddScoped<UserRepository>();
 
 // Services
 
