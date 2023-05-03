@@ -11,6 +11,12 @@ namespace WebApi.Controllers
     {
         private readonly UserService _userService;
 
+        public UserController(UserService userService)
+        {
+            _userService = userService;
+        }
+
+        [Route("SignUp")]
         [HttpPost]
         public async Task<IActionResult> SignUp(SignUpRequest request)
         {
@@ -18,9 +24,27 @@ namespace WebApi.Controllers
             {
                 if (await _userService.SignUpAsync(request))
                 {
-                    return Created("", );
+                    return Created("", null);
                 }
             }
+
+            return BadRequest();
+        }
+        
+        [Route("SignIn")]
+        [HttpPost]
+        public async Task<IActionResult> SignIn(SignInRequest request)
+        {
+            if (ModelState.IsValid)
+            {
+                var token = await _userService.SignInAsync(request);
+                if (!string.IsNullOrEmpty(token))
+                {
+                    return Ok(token);
+                }
+            }
+
+            return Unauthorized("Incorrect email or password");
         }
     }
 }

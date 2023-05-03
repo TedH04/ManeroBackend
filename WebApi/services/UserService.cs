@@ -1,4 +1,5 @@
 ﻿using System.Security.Claims;
+using WebApi.Helpers.Jwt;
 using WebApi.Models.Dtos;
 using WebApi.Models.Identity;
 using WebApi.Repositories;
@@ -8,10 +9,12 @@ namespace WebApi.Services
     public class UserService
     {
         private readonly UserRepository _userRepo;
+        private readonly JwtToken _jwtToken;
 
-        public UserService(UserRepository userRepo)
+        public UserService(UserRepository userRepo, JwtToken jwtToken)
         {
             _userRepo = userRepo;
+            _jwtToken = jwtToken;
         }
 
         public async Task<bool> SignUpAsync(SignUpRequest request)
@@ -49,7 +52,7 @@ namespace WebApi.Services
                         new Claim(ClaimTypes.Name, identityUser.Email!)
                     });
 
-
+                    return _jwtToken.Generate(claimsIdentity, DateTime.Now.AddHours(1));
                 }
             }
 
