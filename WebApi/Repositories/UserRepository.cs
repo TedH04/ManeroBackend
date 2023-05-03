@@ -9,6 +9,7 @@ namespace WebApi.Repositories
 	{
 		private readonly UserManager<CustomIdentityUser> _userManager;
 		private readonly SignInManager<CustomIdentityUser> _signInManager;
+
 		public UserRepository(IdentityContext context, UserManager<CustomIdentityUser> userManager, SignInManager<CustomIdentityUser> signInManager) : base(context)
 		{
 			_userManager = userManager;
