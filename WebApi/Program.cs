@@ -1,3 +1,5 @@
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -13,6 +15,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Azure keyvault
+builder.Configuration.AddAzureKeyVault(new Uri($"{builder.Configuration["KeyVault"]}"), new DefaultAzureCredential());
 
 // Contexts
 builder.Services.AddDbContext<IdentityContext>(x => x.UseSqlServer(builder.Configuration["ManeroG4Sql"]));
@@ -62,7 +66,7 @@ builder.Services.AddAuthentication(x =>
 		ValidateLifetime = true,
 		ValidateIssuerSigningKey = true,
 		IssuerSigningKey = new SymmetricSecurityKey(
-			Encoding.UTF8.GetBytes(builder.Configuration.GetSection("TokenValidation").GetValue<string>("TokenKey")!))
+			Encoding.UTF8.GetBytes(builder.Configuration.GetSection("TokenValidation").GetValue<string>("SecretKey")!))
 	};
 });
 

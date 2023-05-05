@@ -20,7 +20,7 @@ namespace WebApi.Models.Identity
 				FirstName = user.FirstName,
 				LastName = user.LastName,
 				Email = user.Email!,
-				PhoneNumber = user.PhoneNumber ??= null,
+				PhoneNumber = user.PhoneNumber,
 				ProfileImage = user.ProfileImage ??= null
 			};
 		}
