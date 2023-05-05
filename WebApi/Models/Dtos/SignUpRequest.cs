@@ -27,9 +27,9 @@ namespace WebApi.Models.Dtos
         public string Password { get; set; } = null!;
 
         [Required]
-        public string? PhoneNumber { get; set; }
-
-        public string? ProfileImage { get; set; }
+        public string PhoneNumber { get; set; } = null!;
+        
+		    public string? ProfileImage { get; set; }
 
         public static implicit operator CustomIdentityUser(SignUpRequest request)
         {
@@ -38,6 +38,7 @@ namespace WebApi.Models.Dtos
                 FirstName = request.FirstName,
                 LastName = request.LastName,
                 Email = request.Email,
+                PhoneNumber = request.PhoneNumber,
                 UserName = request.Email
             };
         }
