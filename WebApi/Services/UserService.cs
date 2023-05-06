@@ -58,5 +58,10 @@ namespace WebApi.Services
 
             return string.Empty;
         }
+
+        public async Task<UserResponse> GetUserAsync(string userId)
+        {
+            return await _userRepo.GetAsync(x => x.Id == userId);
+        }
     }
 }

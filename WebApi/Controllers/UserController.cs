@@ -46,5 +46,20 @@ namespace WebApi.Controllers
 
             return Unauthorized("Incorrect email or password");
         }
+
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> Get(string userId)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userService.GetUserAsync(userId);
+                if (user != null)
+                {
+                    return Ok(user);
+                }
+            }
+
+            return NotFound();
+        }
     }
 }
