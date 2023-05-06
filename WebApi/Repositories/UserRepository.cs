@@ -21,15 +21,21 @@ namespace WebApi.Repositories
 			return await _userManager.CreateAsync(entity, password);
 		}
 
-		public async Task<CustomIdentityUser> FindUserAsync(string email)
-		{			
+        public async Task<SignInResult> SignInAsync(string email, string password, bool rememberMe, bool lockout)
+        {
+            return await _signInManager.PasswordSignInAsync(email, password, rememberMe, lockout);
+        }
+
+        public async Task<CustomIdentityUser> FindUserByEmailAsync(string email)
+		{
 			var identityUser = await _userManager.FindByEmailAsync(email);
 			return identityUser!;
 		}
 
-		public async Task<SignInResult> SignInAsync(string email, string password, bool rememberMe, bool lockout)
-		{
-			return await _signInManager.PasswordSignInAsync(email, password, rememberMe, lockout);
-		}
+        public async Task<CustomIdentityUser> FindUserByIdAsync(string id)
+        {
+            var identityUser = await _userManager.FindByIdAsync(id);
+            return identityUser!;
+        }
 	}
 }
