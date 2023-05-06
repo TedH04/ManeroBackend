@@ -61,7 +61,13 @@ namespace WebApi.Services
 
         public async Task<UserResponse> GetUserAsync(string userId)
         {
-            return await _userRepo.GetAsync(x => x.Id == userId);
+            var user = await _userRepo.GetAsync(x => x.Id == userId);
+            if (user != null)
+            {
+                return (UserResponse)user;
+            }
+
+            return null!;
         }
 
         public async Task<UserResponse> UpdateUserAsync(UserUpdateRequest request)
