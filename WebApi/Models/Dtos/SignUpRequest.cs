@@ -41,6 +41,5 @@ namespace WebApi.Models.Dtos
                 UserName = request.Email
             };
         }
-
     }
 }
