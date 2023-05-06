@@ -1,12 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.Internal;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using WebApi.Contexts;
 
 namespace WebApi.Repositories.MainRepo
 {
-	public abstract class Repository<TEntity, TContext>  where TEntity : class where TContext : DbContext
+    public abstract class Repository<TEntity, TContext>  where TEntity : class where TContext : DbContext
 	{
 		TContext _context;
 

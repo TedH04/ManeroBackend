@@ -1,8 +1,6 @@
-﻿using WebApi.Models.Identity;
-
-namespace WebApi.Models.Dtos
+﻿namespace WebApi.Models.Dtos
 {
-	public class UserResponse
+    public class UserResponse
 	{
 		public string UserId { get; set; } = null!;
 		public string FirstName { get; set; } = null!;
