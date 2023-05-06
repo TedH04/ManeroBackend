@@ -73,6 +73,7 @@ namespace WebApi.Services
                 user.LastName = request.LastName ?? user.LastName;
                 user.Email = request.Email ?? user.Email;
                 user.PhoneNumber = request.PhoneNumber ?? user.PhoneNumber;
+                user.ProfileImage = request.ProfileImage ?? user.ProfileImage;
 
                 return await _userRepo.UpdateAsync(user);
             }
