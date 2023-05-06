@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using WebApi.Models.Dtos;
 using WebApi.Services;
 
@@ -59,7 +58,7 @@ namespace WebApi.Controllers
                 }
             }
 
-            return NotFound();
+            return NotFound($"User with id '{userId}' not found");
         }
 
         [HttpPatch]
