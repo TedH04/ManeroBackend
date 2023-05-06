@@ -38,7 +38,7 @@ namespace WebApi.Services
 
         public async Task<string> SignInAsync(SignInRequest request)
         {
-            var identityUser = await _userRepo.FindUserAsync(request.Email);
+            var identityUser = await _userRepo.FindUserByEmailAsync(request.Email);
 
             if (identityUser != null)
             {
@@ -62,6 +62,22 @@ namespace WebApi.Services
         public async Task<UserResponse> GetUserAsync(string userId)
         {
             return await _userRepo.GetAsync(x => x.Id == userId);
+        }
+
+        public async Task<UserResponse> UpdateUserAsync(UserUpdateRequest request)
+        {
+            var user = await _userRepo.FindUserByIdAsync(request.UserId);
+            if (user != null)
+            {
+                user.FirstName = request.FirstName ?? user.FirstName;
+                user.LastName = request.LastName ?? user.LastName;
+                user.Email = request.Email ?? user.Email;
+                user.PhoneNumber = request.PhoneNumber ?? user.PhoneNumber;
+
+                return await _userRepo.UpdateAsync(user);
+            }
+
+            return null!;
         }
     }
 }

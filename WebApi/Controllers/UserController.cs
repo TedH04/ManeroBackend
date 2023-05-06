@@ -61,5 +61,22 @@ namespace WebApi.Controllers
 
             return NotFound();
         }
+
+        [HttpPatch]
+        public async Task<IActionResult> Update(UserUpdateRequest request)
+        {
+            if (ModelState.IsValid)
+            {
+                var updatedUser = await _userService.UpdateUserAsync(request);
+                if (updatedUser != null)
+                {
+                    return Ok(updatedUser);
+                }
+
+                return NotFound($"User with id '{request.UserId}' not found");
+            }
+
+            return BadRequest();
+        }
     }
 }
