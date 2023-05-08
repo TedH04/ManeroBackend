@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using WebApi.Helpers.Jwt;
 using WebApi.Models.Dtos;
+using WebApi.Models.Entities;
 using WebApi.Models.Identity;
 using WebApi.Repositories;
 
@@ -9,12 +10,14 @@ namespace WebApi.Services
     public class UserService
     {
         private readonly UserRepository _userRepo;
+        private readonly AddressService _addressService;
         private readonly JwtToken _jwtToken;
 
-        public UserService(UserRepository userRepo, JwtToken jwtToken)
+        public UserService(UserRepository userRepo, JwtToken jwtToken, AddressService addressService)
         {
             _userRepo = userRepo;
             _jwtToken = jwtToken;
+            _addressService = addressService;
         }
 
         public async Task<bool> SignUpAsync(SignUpRequest request)
@@ -80,11 +83,33 @@ namespace WebApi.Services
                 user.Email = request.Email ?? user.Email;
                 user.PhoneNumber = request.PhoneNumber ?? user.PhoneNumber;
                 user.ProfileImage = request.ProfileImage ?? user.ProfileImage;
+                user.UserAddresses = request.Addresses == null ?
+                    user.UserAddresses : await GetUserAddressEntities(user, request.Addresses);
 
                 return await _userRepo.UpdateAsync(user);
             }
 
             return null!;
+        }
+
+        private async Task<ICollection<UserAddressEntity>> GetUserAddressEntities(CustomIdentityUser user, ICollection<AddressRequest> addressRequests)
+        {
+            var addresses = new List<UserAddressEntity>();
+
+            foreach (var addressRequest in addressRequests)
+            {
+                var address = await _addressService.GetOrCreateAsync(addressRequest);
+
+                addresses.Add(new UserAddressEntity
+                {
+                    Address = await _addressService.GetOrCreateAsync(addressRequest),
+                    AddressId = address.Id,
+                    User = user,
+                    UserId = user.Id,
+                });
+            }
+
+            return addresses;
         }
     }
 }

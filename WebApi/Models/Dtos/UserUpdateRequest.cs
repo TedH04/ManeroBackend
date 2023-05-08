@@ -21,5 +21,7 @@ namespace WebApi.Models.Dtos
         public string? PhoneNumber { get; set; }
 
         public string? ProfileImage { get; set; }
+
+        public ICollection<AddressRequest>? Addresses { get; set; } = new HashSet<AddressRequest>();
     }
 }
