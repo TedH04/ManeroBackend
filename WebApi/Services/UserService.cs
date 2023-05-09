@@ -1,7 +1,6 @@
 ﻿using System.Security.Claims;
 using WebApi.Helpers.Jwt;
 using WebApi.Models.Dtos;
-using WebApi.Models.Entities;
 using WebApi.Models.Identity;
 using WebApi.Repositories;
 
@@ -83,8 +82,10 @@ namespace WebApi.Services
                 user.Email = request.Email ?? user.Email;
                 user.PhoneNumber = request.PhoneNumber ?? user.PhoneNumber;
                 user.ProfileImage = request.ProfileImage ?? user.ProfileImage;
-                user.UserAddresses = request.Addresses == null ?
-                    user.UserAddresses : await GetUserAddressEntities(user, request.Addresses);
+
+                // TODO
+                //user.UserAddresses = request.Addresses == null ?
+                //    user.UserAddresses : await GetUserAddressEntities(user, request.Addresses);
 
                 return await _userRepo.UpdateAsync(user);
             }
@@ -92,24 +93,25 @@ namespace WebApi.Services
             return null!;
         }
 
-        private async Task<ICollection<UserAddressEntity>> GetUserAddressEntities(CustomIdentityUser user, ICollection<AddressRequest> addressRequests)
-        {
-            var addresses = new List<UserAddressEntity>();
+        // TODO
+        //private async Task<ICollection<UserAddressEntity>> GetUserAddressEntities(CustomIdentityUser user, ICollection<AddressRequest> addressRequests)
+        //{
+        //    var addresses = new List<UserAddressEntity>();
 
-            foreach (var addressRequest in addressRequests)
-            {
-                var address = await _addressService.GetOrCreateAsync(addressRequest);
+        //    foreach (var addressRequest in addressRequests)
+        //    {
+        //        var address = await _addressService.GetOrCreateAsync(addressRequest);
 
-                addresses.Add(new UserAddressEntity
-                {
-                    Address = address,
-                    AddressId = address.Id,
-                    User = user,
-                    UserId = user.Id,
-                });
-            }
+        //        addresses.Add(new UserAddressEntity
+        //        {
+        //            Address = address,
+        //            AddressId = address.Id,
+        //            User = user,
+        //            UserId = user.Id,
+        //        });
+        //    }
 
-            return addresses;
-        }
+        //    return addresses;
+        //}
     }
 }
