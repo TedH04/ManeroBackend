@@ -102,7 +102,7 @@ namespace WebApi.Services
 
                 addresses.Add(new UserAddressEntity
                 {
-                    Address = await _addressService.GetOrCreateAsync(addressRequest),
+                    Address = address,
                     AddressId = address.Id,
                     User = user,
                     UserId = user.Id,
